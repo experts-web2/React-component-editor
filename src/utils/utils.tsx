@@ -11,20 +11,26 @@ export function generateReactComponent(json: string) {
   try {
     let data = JSON.parse(json);
     const { componentName, props, propsDefaults, imports, content } = data;
-    const importStatements = imports.join("\n");
-    const propTypes = props?.filter((prop: any) => prop.key && prop.value)
-      .map((prop: any) => `  ${prop.key}: ${prop.value},`)
-      .join("\n")|| undefined;
-    const defaultProps = propsDefaults?.filter((prop: any) => prop.key && prop.value)
-      .map((prop: any) => `  ${prop.key}: ${prop.value},`)
-      .join("\n")|| undefined;
+
+    const importStatements = imports?.join("\n") || undefined;
+    const propTypes =
+      props
+        ?.filter((prop: any) => prop.key && prop.value)
+        .map((prop: any) => `  ${prop.key}: ${prop.value},`)
+        .join("\n") || undefined;
+    const defaultProps =
+      propsDefaults
+        ?.filter((prop: any) => prop.key && prop.value)
+        .map((prop: any) => `  ${prop.key}: ${prop.value},`)
+        .join("\n") || undefined;
+
     const componentCode = `
         ${importStatements}
   
         const ${componentName} = ({${propTypes && "\n" + propTypes}
         }) => {
           return (
-            ${content.trim()}
+            ${content?.trim()}
           );
         };
   
@@ -113,4 +119,3 @@ export function convertComponentToJSON(component: any) {
     content,
   };
 }
-

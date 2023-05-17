@@ -22,7 +22,7 @@ function App() {
     <div>
       <div className="container">
         <div className="editor-container">
-          <h1 className="heading">React Component To JSON</h1>
+          <h1 className="heading">React Editor</h1>
           <div className="editor-container">
             <ComponentToJson
               reactCode={reactCode}
@@ -31,7 +31,7 @@ function App() {
           </div>
         </div>
         <div className="editor-container">
-          <h1 className="heading">JSON To React Component</h1>
+          <h1 className="heading">JSON Editor</h1>
           <div className="editor-container">
             <JsonToComponent
               generateReactCode={transformJsonToReact}

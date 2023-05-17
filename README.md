@@ -34,15 +34,12 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `How to use this App`
-At home page you will see 2 Editors.
-1- React Component Editor
-2- Json Editor
-You can paste the React component code into `React component editor` and press its below button
-`Convert to JSON`
+At home page you will see 2 Editors.\
+1- React Component Editor.\
+2- Json Editor.\
+You can paste the React component code into `React component editor`.\
+ and press its below button `Convert to JSON` .\
 It will transform that react code into JSON.
-- If you have valid Json and paste it into `Json Editor` and press its below button
-`Convert to React`
-It will transform that Json into React component.
 
 #### `Sample React Code`
 - <code> `import React from 'react'
@@ -58,7 +55,7 @@ It will transform that Json into React component.
         <button className={className} style={{ color }} onClick={onClick}>      {title}    </button>
       );
     };
-    
+
   Button.propTypes = {    
   className: PropTypes.string,
   onClick: PropTypes.func.isRequired,
@@ -70,8 +67,11 @@ It will transform that Json into React component.
     export default Button;
      `</code>
      
-     It will generate this JSON code
-     
+     It will generate the JSON code .\
+
+     - If you have valid Json and paste it into `Json Editor` .\
+      and press its below button `Convert to React` .\
+  It will transform that Json into React component.
 ### `Sample JSON Code`     
 - <code>`{
   "componentName": "Button",

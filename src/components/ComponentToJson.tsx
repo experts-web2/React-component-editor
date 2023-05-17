@@ -5,7 +5,8 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
-import {  useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 /**
  * React Component to JSON
@@ -47,7 +48,11 @@ const ComponentToJSON = ({ reactCode, generateJsonCode }: Props) => {
           convertToJSON();
         }}
       >
-        Transform React Component to Json
+        Convert to JSON
+        <span>
+          {" "}
+          <FaArrowRight style={icon} />
+        </span>
       </button>
     </>
   );
@@ -60,4 +65,8 @@ const editorStyle = {
   border: "1px solid #ddd",
   borderRadius: "4px",
   marginBottom: "10px",
+};
+const icon = {
+  marginLeft: "10px",
+  marginTop: "5px",
 };

@@ -1,4 +1,4 @@
-import { convertComponentToJSON } from "../utils/utils";
+import {  useMemo, useRef } from "react";
 import AceEditor from "react-ace";
 import "../App.css";
 import "ace-builds/src-noconflict/worker-javascript";
@@ -7,27 +7,35 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { useRef } from "react";
 
-function JsonToComponent({ component, generateComponent }: any) {
-  const editorRef = useRef<any>(null);
+/**
+ * Convert JSON to React Component
+ * @param param0
+ * @returns
+ */
+interface Props {
+  jsonCode: string;
+  generateReactCode: (jsonCode: any) => void;
+}
 
-  const handleClick = () => {
-    if (editorRef.current) {
-      console.log("editorRef.current=", editorRef.current.editor.getValue());
-      const editorValue = editorRef.current.editor.getValue();
-      generateComponent(editorValue);
+function JsonToComponent({ jsonCode, generateReactCode }: Props) {
+  const editorReference = useRef<any>(null);
+  const jsonToReact = () => {
+    if (editorReference?.current?.editor?.getValue() !== "") {
+      generateReactCode(editorReference?.current?.editor?.getValue());
     }
   };
+
+  useMemo(() => {
+    editorReference?.current?.editor?.setValue(JSON.stringify(jsonCode, null, 2));
+  }, [jsonCode]);
 
   return (
     <>
       <AceEditor
         style={editorStyle}
-        ref={editorRef}
+        ref={editorReference}
         setOptions={{ useWorker: false }}
-        defaultValue={JSON.stringify(component, null, 2)}
-        value={JSON.stringify(component, null, 2)}
         mode="javascript"
         theme="monokai"
         name="code-editor"
@@ -36,7 +44,7 @@ function JsonToComponent({ component, generateComponent }: any) {
       <button
         style={buttonStyle}
         onClick={() => {
-          handleClick();
+          jsonToReact();
         }}
       >
         Transform Json to React Component
@@ -65,9 +73,3 @@ const buttonStyle = {
   marginLeft: "140px",
   marginTop: "50px",
 };
-
-// let newValue = "";
-// const setValue = (value: any) => {
-//   newValue = value;
-//   console.log("Type=", typeof newValue, "newValue=", newValue);
-// };

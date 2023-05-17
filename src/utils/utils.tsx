@@ -1,4 +1,9 @@
-export function generateReactComponent(json: any) {
+/**
+ * Generate React Component Code
+ * @param json
+ * @returns
+ */
+export function generateReactComponent(json: string) {
   if (!json) {
     return "kindly provide a valid json";
   }
@@ -7,14 +12,12 @@ export function generateReactComponent(json: any) {
     let data = JSON.parse(json);
     const { componentName, props, propsDefaults, imports, content } = data;
     const importStatements = imports.join("\n");
-    const propTypes = props
-      .filter((prop: any) => prop.key && prop.value)
+    const propTypes = props?.filter((prop: any) => prop.key && prop.value)
       .map((prop: any) => `  ${prop.key}: ${prop.value},`)
-      .join("\n");
-    const defaultProps = propsDefaults
-      .filter((prop: any) => prop.key && prop.value)
+      .join("\n")|| undefined;
+    const defaultProps = propsDefaults?.filter((prop: any) => prop.key && prop.value)
       .map((prop: any) => `  ${prop.key}: ${prop.value},`)
-      .join("\n");
+      .join("\n")|| undefined;
     const componentCode = `
         ${importStatements}
   
@@ -42,6 +45,11 @@ export function generateReactComponent(json: any) {
   }
 }
 
+/**
+ * Generate JSON from React Component
+ * @param component
+ * @returns
+ */
 export function convertComponentToJSON(component: any) {
   if (!component) {
     return "kindly provide a component";
@@ -56,9 +64,10 @@ export function convertComponentToJSON(component: any) {
   }
 
   const componentName = match ? match[1] : undefined;
-  const imports = component.match(/import .+ from ['"].+['"]/g) || [];
+  const imports = component.match(/import .+ from ['"].+['"]/g) || undefined;
   const content =
-    component.match(/(?<=return \().+(?=\))/s)?.[0].replace(/\n/g, "") || "";
+    component.match(/(?<=return \().+(?=\))/s)?.[0].replace(/\n/g, "") ||
+    undefined;
 
   const propTypesMatch = component.match(/propTypes\s*=\s*{([^}]+)}/);
   const defaultPropsMatch = component.match(/defaultProps\s*=\s*{([^}]+)}/);
@@ -76,7 +85,7 @@ export function convertComponentToJSON(component: any) {
           return { key, value };
         }
       )
-    : [];
+    : undefined;
 
   const propsDefaults = defaultPropsMatch
     ? defaultPropsMatch[1].split(",").map(
@@ -91,7 +100,10 @@ export function convertComponentToJSON(component: any) {
           return { key, value };
         }
       )
-    : [];
+    : undefined;
+
+  if (!componentName && !props && !propsDefaults && !imports && !content)
+    return "Invalid Component";
 
   return {
     componentName,
@@ -101,3 +113,4 @@ export function convertComponentToJSON(component: any) {
     content,
   };
 }
+

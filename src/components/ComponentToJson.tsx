@@ -5,40 +5,46 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { useRef } from "react";
+import {  useMemo, useRef } from "react";
 
-const ComponentToJSON: any = ({ component, codeTransformation }: any) => {
-  const reactEditorRef = useRef<any>(null);
- 
+/**
+ * React Component to JSON
+ * @param param0
+ * @returns
+ */
 
-  const handleClick =async () => {
-    if (reactEditorRef.current) {
-      const editorValue = reactEditorRef.current.editor.getValue();
-      codeTransformation(editorValue);
+interface Props {
+  reactCode: any;
+  generateJsonCode: (reactCode: string) => void;
+}
+const ComponentToJSON = ({ reactCode, generateJsonCode }: Props) => {
+  const editorReference = useRef<any>(null);
+
+  const convertToJSON = () => {
+    if (editorReference?.current?.editor?.getValue() !== "") {
+      generateJsonCode(editorReference?.current?.editor?.getValue());
     }
   };
+
+  useMemo(() => {
+    editorReference?.current?.editor?.setValue(reactCode);
+  }, [reactCode]);
 
   return (
     <>
       <AceEditor
-      ref={reactEditorRef}
+        ref={editorReference}
         style={editorStyle}
         setOptions={{ useWorker: false }}
-        defaultValue={JSON.stringify(component, null, 1)}
-        value={component}
         mode="javascript"
         theme="monokai"
-        // onChange={(value) => {
-        //   setValue(value);
-        // }}
         name="code-editor"
         editorProps={{ $blockScrolling: true }}
       />
       <button
         className="editor_btn"
         onClick={() => {
-          handleClick();
-          // 
+          convertToJSON();
         }}
       >
         Transform React Component to Json

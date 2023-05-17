@@ -5,17 +5,16 @@ import { convertComponentToJSON, generateReactComponent } from "./utils/utils";
 import "./App.css";
 
 function App() {
-  const [reactCode, setReactCode] = useState<any>();
+  const [reactCode, setReactCode] = useState<string>();
   const [jsonCode, setJsonCode] = useState<any>();
 
-  const formReactToJson = (reactCode: string) => {
-    const json: any = convertComponentToJSON(reactCode);
-    setJsonCode(json);
-    setReactCode(reactCode);
+  const transformReactToJson = (reactCode: string) => {
+    const jsonCode: any = convertComponentToJSON(reactCode);
+    setJsonCode(jsonCode);
   };
 
-  const transformJsonToReact = (newValue: any) => {
-    const jsonToReact = generateReactComponent(newValue);
+  const transformJsonToReact = (jsonCode: string) => {
+    const jsonToReact: string = generateReactComponent(jsonCode);
     setReactCode(jsonToReact);
   };
 
@@ -23,20 +22,20 @@ function App() {
     <div>
       <div className="container">
         <div className="editor-container">
-          <h1 className="heading">React Into JSON</h1>
+          <h1 className="heading">React Component To JSON</h1>
           <div className="editor-container">
             <ComponentToJson
-              component={reactCode}
-              codeTransformation={formReactToJson}
+              reactCode={reactCode}
+              generateJsonCode={transformReactToJson}
             />
           </div>
         </div>
         <div className="editor-container">
-          <h1 className="heading">JSON Into ReactComponent</h1>
+          <h1 className="heading">JSON To React Component</h1>
           <div className="editor-container">
             <JsonToComponent
-              generateComponent={transformJsonToReact}
-              component={jsonCode}
+              generateReactCode={transformJsonToReact}
+              jsonCode={jsonCode}
             />
           </div>
         </div>

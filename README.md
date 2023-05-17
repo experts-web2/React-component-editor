@@ -14,6 +14,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+### `npm run storybook`
+Launch the App in story book on this URL:[http://localhost:6006/](Storybook) to view the custom component independently,
+with all possible values
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
@@ -28,6 +32,82 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `How to use this App`
+At home page you will see 2 Editors.
+1- React Component Editor
+2- Json Editor
+You can paste the React component code into `React component editor` and press its below button
+`Convert to JSON`
+It will transform that react code into JSON.
+- If you have valid Json and paste it into `Json Editor` and press its below button
+`Convert to React`
+It will transform that Json into React component.
+
+#### `Sample React Code`
+- <code> `import React from 'react'
+   import PropTypes from 'prop-types'    
+  
+  const Button = ({
+  className: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  color:  PropTypes.string,
+  title:  PropTypes.string.isRequired,
+    }) => {
+      return (
+        <button className={className} style={{ color }} onClick={onClick}>      {title}    </button>
+      );
+    };
+    
+  Button.propTypes = {    
+  className: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  color:  PropTypes.string,
+  title:  PropTypes.string.isRequired,
+    };
+    
+    Button.defaultProps = {color:  'red'};    
+    export default Button;
+     `</code>
+     
+     It will generate this JSON code
+     
+### `Sample JSON Code`     
+- <code>`{
+  "componentName": "Button",
+  "props": [
+    {
+      "key": "className",
+      "value": " PropTypes.string"
+    },
+    {
+      "key": "onClick",
+      "value": " PropTypes.func.isRequired"
+    },
+    {
+      "key": "color",
+      "value": "  PropTypes.string"
+    },
+    {
+      "key": "title",
+      "value": "  PropTypes.string.isRequired"
+    },
+    {
+      "key": ""
+    }
+  ],
+  "propsDefaults": [
+    {
+      "key": "color",
+      "value": "  'red'"
+    }
+  ],
+  "imports": [
+    "import React from 'react'",
+    "import PropTypes from 'prop-types'"
+  ],
+  "content": "        <button className={className} style={{ color }} onClick={onClick}>      {title}    </button>      "
+}`</code>
 
 ### `npm run eject`
 

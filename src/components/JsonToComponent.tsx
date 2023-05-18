@@ -7,7 +7,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { FaArrowLeft } from "react-icons/fa";
+import Button from "./Button";
 
 /**
  * Convert JSON to React Component
@@ -44,18 +44,7 @@ function JsonToComponent({ jsonCode, generateReactCode }: Props) {
         name="code-editor"
         editorProps={{ $blockScrolling: true }}
       />
-      <button
-        style={buttonStyle}
-        onClick={() => {
-          jsonToReact();
-        }}
-      >
-        <span>
-          {" "}
-          <FaArrowLeft style={icon} />
-        </span>
-       Convert to React
-      </button>
+      <Button callToAction={jsonToReact} title={"Convert to React"} icon={'left'} />
     </>
   );
 }
@@ -69,23 +58,6 @@ const editorStyle = {
   borderRadius: "4px",
   marginRight: "30px",
 };
-const icon = {
-  marginRight: "10px",
-  marginTop: "5px",
-};
 
 
-const buttonStyle = {
-  padding: "8px 16px 8px 8px",
-  backgroundColor: "#4CAF50",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginTop: "50px",
-  display:"flex",
-  alignItems:"center",
-  fontWeight: 600,
-};
+

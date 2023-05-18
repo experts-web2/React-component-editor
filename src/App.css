@@ -35,7 +35,7 @@ h1 {
 }
 
 .editor_btn {
-  padding: 8px 10px 8px 20px;
+  padding: 8px 10px;
   background-color: #4caf50;
   color: #fff;
   border: none;
@@ -48,8 +48,8 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   font-weight: 600;
-
 }
+
 
 .editor_btn:hover {
   background-color: #45a049;

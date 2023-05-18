@@ -6,7 +6,7 @@ import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import { useMemo, useRef } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import Button from "./Button";
 
 /**
  * React Component to JSON
@@ -42,18 +42,7 @@ const ComponentToJSON = ({ reactCode, generateJsonCode }: Props) => {
         name="code-editor"
         editorProps={{ $blockScrolling: true }}
       />
-      <button
-        className="editor_btn"
-        onClick={() => {
-          convertToJSON();
-        }}
-      >
-        Convert to JSON
-        <span>
-          {" "}
-          <FaArrowRight style={icon} />
-        </span>
-      </button>
+      <Button callToAction={convertToJSON} title={"Convert to JSON"} icon={'right'} />
     </>
   );
 };
